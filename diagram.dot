@@ -1,0 +1,32 @@
+digraph UCs {
+ graph [rankdir=LR,bgcolor="white",fontname="DejaVu Sans",label="Система обліку бібліотеки · Use Case",labelloc=t,fontsize=22,pad=0.3, nodesep=0.42,ranksep=1.0, splines=polyline];
+ node [fontname="DejaVu Sans",fontsize=12]; edge [fontname="DejaVu Sans",fontsize=10,color="#4C667F"];
+ Reader [label="Читач",shape=box,style="rounded,filled",fillcolor="#EAF5EC",color="#447D53"];
+ Staff [label="Працівник бібліотеки",shape=box,style="rounded,filled",fillcolor="#EAF5EC",color="#447D53"];
+ Librarian [label="Бібліотекар",shape=box,style="rounded,filled",fillcolor="#EAF5EC",color="#447D53"];
+ Cataloger [label="Каталогізатор",shape=box,style="rounded,filled",fillcolor="#EAF5EC",color="#447D53"];
+ subgraph cluster_system {
+  label="Межа системи"; color="#89A5BE"; style="rounded";bgcolor="#FAFCFE";
+  node [shape=ellipse,style=filled,fillcolor="#EBF4FD",color="#557894"];
+  U01 [label="UC-01\nЗнайти видання"];
+  U02 [label="UC-02\nПереглянути доступність\nпримірника"];
+  U03 [label="UC-03\nЗнайти читача"];
+  U04 [label="UC-04\nЗареєструвати читача"];
+  U05 [label="UC-05\nОформити видачу\nпримірника",fillcolor="#DFEFFF",penwidth=2];
+  U06 [label="UC-06\nПовторно видати примірник"];
+  U07 [label="UC-07\nОформити повернення"];
+  U08 [label="UC-08\nПереглянути історію видач"];
+  U09 [label="UC-09\nДодати видання"];
+  U10 [label="UC-10\nЗареєструвати примірник"];
+ }
+ Reader -> U01 [arrowhead=none]; Reader -> U02 [arrowhead=none];
+ Staff -> U01 [arrowhead=none]; Staff -> U02 [arrowhead=none];
+ Librarian -> U03 [arrowhead=none]; Librarian -> U04 [arrowhead=none]; Librarian -> U05 [arrowhead=none];
+ Librarian -> U06 [arrowhead=none]; Librarian -> U07 [arrowhead=none]; Librarian -> U08 [arrowhead=none];
+ Cataloger -> U09 [arrowhead=none]; Cataloger -> U10 [arrowhead=none];
+ Librarian -> Staff [arrowhead=empty,style=dashed,label="узагальнення",constraint=false];
+ Cataloger -> Staff [arrowhead=empty,style=dashed,constraint=false];
+ U05 -> U02 [style=dashed,label="«include»",constraint=false];
+ U05 -> U03 [style=dashed,label="«include»",constraint=false];
+ U06 -> U05 [style=dashed,label="«extend»",constraint=false];
+}
