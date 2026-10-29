@@ -5,7 +5,7 @@ import re
 root = Path(__file__).resolve().parents[1]
 spec = (root / "spec.md").read_text(encoding="utf-8")
 plant = (root / "diagram.puml").read_text(encoding="utf-8")
-ai = (root / "ai/prompt-example.md").read_text(encoding="utf-8")
+ai = (root / "ai/prompt.md").read_text(encoding="utf-8")
 for name in ["Book", "Author", "Copy", "Member", "Loan"]:
     assert name in spec, f"Missing entity {name}"
 for i in range(1, 17):
@@ -17,7 +17,7 @@ for i in range(1,9):
 for i in range(1,11):
     assert f'UC-{i:02d}' in spec
 assert '<<include>>' in plant and '<<extend>>' in plant and '--|>' in plant
-assert "не є реальною перепискою" in ai
+assert "# Приклад правильної взаємодії студента з AI під час ЛР2" in ai
 assert not re.search(r'Warehouse|Supplier|Movement|Stock|складськ', spec + '\n' + ai, flags=re.I)
 for filename in ["DEFENSE.md","README.md","diagram.puml","diagram.svg","ai/audit.md"]:
     assert (root/filename).exists(), filename
